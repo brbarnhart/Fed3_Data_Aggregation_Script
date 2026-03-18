@@ -1,32 +1,27 @@
 import argparse
-import os
 import warnings
 from pathlib import Path
 
 import pandas as pd
 import questionary
-from pandas.io.parsers.python_parser import parser_defaults
 
 warnings.filterwarnings("ignore", category=pd.errors.PerformanceWarning)
 
 
 def get_raw_data_files(raw_data_path: Path) -> list[Path]:
-    # grab list of data file names from raw_data folder
-    if not raw_data_path.exists():
-        print(f"error: {raw_data_path} does not exist")
-        return []
-    if not raw_data_path.is_dir():
-        print(f"error: {raw_data_path} is not a directory")
-        return []
+    files = list(raw_data_path.glob("*.csv"))  # or "**/*.csv" if recursive, etc.
 
-    data_files = [
-        Path(f) for f in os.listdir(raw_data_path) if f.lower().endswith(".csv")
-    ]
+    if not files:
+        raise ValueError(
+            f"No FED3 CSV files found in '{raw_data_path}'.\n"
+            "Please make sure:\n"
+            "  - The folder contains at least one file ending in .csv\n"
+            "  - The files follow the expected FED3 naming format (e.g. containing '_FED' or similar)\n"
+            "  - You're using the correct --data flag if not using the default 'raw_data' folder\n\n"
+            "Example: Place your data files in ./raw_data/ or run with --data sample_data for testing."
+        )
 
-    if data_files == []:
-        print(f"error: no data files found in {raw_data_path}")
-
-    return data_files
+    return files
 
 
 def setup_parser() -> argparse.ArgumentParser:
@@ -294,12 +289,16 @@ def create_df(
     data = pd.DataFrame(columns=columns)
     for file in data_files:
         # parse metadata from file name
-        base_name = os.path.splitext(file)[0]
+        base_name = Path(file).stem
         parts = base_name.split("_")
 
         if len(parts) != len(condition_names):
             print(f"error parsing metadata from filename: {base_name}")
             print(f"expected fields to be: {condition_names}")
+            print(
+                f"Length of parts: {len(parts)}, length of condition_names: {len(condition_names)}"
+            )
+            print(f"parts: {parts}")
             exit()
 
         df = read_data(folder_path, file, session_length)
@@ -343,7 +342,11 @@ if __name__ == "__main__":
 
     parser = setup_parser()
     args = parser.parse_args()
-    raw_data_path = (cwd / args.data).resolve()
+
+    if args.test:
+        raw_data_path = (cwd / "sample_data").resolve()
+    else:
+        raw_data_path = (cwd / args.data).resolve()
 
     (session_length_min, bin_size, breakpoint_time) = get_user_inputs(args)
 
