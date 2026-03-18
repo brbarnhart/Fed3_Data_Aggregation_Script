@@ -65,13 +65,13 @@ Alternative with plain pip (slower install):
 ### CLI Flags (non-interactive mode)
 All flags are optional — if omitted, the script prompts interactively.
 
-Flag,Type,Default,Description
---data,str,raw_data,Folder containing .csv files (try sample_data for testing)
---session,int,(prompt),Session length in minutes
---bin,int,(prompt),Bin size in minutes for aggregation
---breakpoint,float,(prompt),FR threshold for breakpoint detection (enables mode if provided)
---test,flag,off,Use defaults for condition names (skips prompts)
---condition-names,strings,(prompt),"Override condition field names, e.g. --condition-names Strain Diet Cohort"
+| Flag          | Type  | Default    | Description                                      |
+|---------------|-------|------------|--------------------------------------------------|
+| `--data`      | str   | `raw_data` | Folder with `.csv` files (try `sample_data`)     |
+| `--session`   | int   | (prompt)   | Session length in minutes                        |
+| `--bin`       | int   | (prompt)   | Bin size in minutes                              |
+| `--breakpoint`| float | (prompt)   | FR threshold for breakpoint detection            |
+| `--test`      | flag  | off        | Use defaults & skip condition name prompts       |
 
 Examples:
   ```Bash
