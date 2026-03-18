@@ -1,5 +1,5 @@
 [project]
-name = "fed3-data-aggregation-script-v3"
+name = "fed3-data-aggregation-script"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
