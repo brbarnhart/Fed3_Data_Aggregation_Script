@@ -50,7 +50,7 @@ def setup_parser() -> argparse.ArgumentParser:
         "--breakpoint",
         type=int,
         default=None,
-        help="inactive time threshold in minutes for breakpoint mode (if provided, enables breakpoint mode and skips prompt)",
+        help="inactive time threshold in minutes for breakpoint mode (skips prompt if provided)",
     )
     parser.add_argument(
         "--test",
