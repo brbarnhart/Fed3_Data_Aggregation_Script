@@ -1,0 +1,13 @@
+ID,Sex,Cage,Stim,Diet,Cohort,FeederID,Date,RecordingNumber,total_correct_pokes,total_incorrect_pokes,total_pellets,binned_correct_pokes,binned_incorrect_pokes,binned_pellets,bin,bin_time,breakpoint_active_pokes,breakpoint_all_pokes
+J6749,M,YD05,Stim,HFHS,Cohort1,FED005,082923,02,0,0,0,0.0,0.0,0.0,1,0,32.0,32.0
+J6749,M,YD05,Stim,HFHS,Cohort1,FED005,082923,02,0,0,0,,,,2,30,32.0,32.0
+J6749,M,YD05,Stim,HFHS,Cohort1,FED005,082923,02,0,0,0,,,,3,60,32.0,32.0
+J6749,M,YD05,Stim,HFHS,Cohort1,FED005,082923,02,0,0,0,,,,4,90,32.0,32.0
+J6770,F,YD09,Stim,Chow,Cohort1,FED018,090723,00,0,0,0,0.0,0.0,0.0,1,0,118.0,118.0
+J6770,F,YD09,Stim,Chow,Cohort1,FED018,090723,00,0,0,0,,,,2,30,118.0,118.0
+J6770,F,YD09,Stim,Chow,Cohort1,FED018,090723,00,0,0,0,,,,3,60,118.0,118.0
+J6770,F,YD09,Stim,Chow,Cohort1,FED018,090723,00,0,0,0,,,,4,90,118.0,118.0
+J6776,F,YD10,Stim,HFHS,Cohort1,FED007,081723,02,0,0,0,0.0,0.0,0.0,1,0,50.0,50.0
+J6776,F,YD10,Stim,HFHS,Cohort1,FED007,081723,02,0,0,0,,,,2,30,50.0,50.0
+J6776,F,YD10,Stim,HFHS,Cohort1,FED007,081723,02,0,0,0,,,,3,60,50.0,50.0
+J6776,F,YD10,Stim,HFHS,Cohort1,FED007,081723,02,0,0,0,,,,4,90,50.0,50.0

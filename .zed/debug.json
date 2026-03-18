@@ -1,0 +1,27 @@
+// Project-local debug tasks
+//
+// For more documentation on how to configure debug tasks,
+// see: https://zed.dev/docs/debugger
+[
+  {
+    "label": "Run current file (internalConsole - direct uv venv)",
+    "adapter": "Debugpy",
+    "request": "launch",
+    "program": "${file}",
+    "python": "${workspaceFolder}/.venv/Scripts/python.exe",
+    "cwd": "${workspaceFolder}",
+    "console": "internalConsole",
+    "justMyCode": true,
+  },
+  {
+    "label": "Run current file with --test (internalConsole - direct uv venv)",
+    "adapter": "Debugpy",
+    "request": "launch",
+    "program": "${file}",
+    "args": ["--test"],
+    "python": "${workspaceFolder}/.venv/Scripts/python.exe",
+    "cwd": "${workspaceFolder}",
+    "console": "internalConsole",
+    "justMyCode": true,
+  },
+]
