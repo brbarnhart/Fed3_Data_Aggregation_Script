@@ -240,18 +240,18 @@ def get_aggregate_data(df, breakpoint_cutoff):
 
     # pull out aggregated data
     aggregate_data = {
-        "total_correct_pokes": last_row.get("left_poke_count", 0),
-        "total_incorrect_pokes": last_row.get("right_poke_count", 0),
-        "total_pellets": last_row.get("pellet_count", 0),
-        "breakpoint_active_pokes": breakpoint_active_pokes,
-        "breakpoint_all_pokes": breakpoint_all_pokes,
+        "Total_Correct_Pokes": last_row.get("Left_Poke_Count", 0),
+        "Total_Incorrect_Pokes": last_row.get("Right_Poke_Count", 0),
+        "Total_Pellets": last_row.get("Pellet_Count", 0),
+        "Breakpoint_Active_Pokes": breakpoint_active_pokes,
+        "Breakpoint_All_Pokes": breakpoint_all_pokes,
     }
     return aggregate_data
 
 
 def get_binned_data(df, time_bins):
     # pull out binned data
-    columns = ["left_poke_count", "right_poke_count", "pellet_count"]
+    columns = ["Left_Poke_Count", "Right_Poke_Count", "Pellet_Count"]
     binned_data = pd.DataFrame(columns=columns)
     binned_data.loc[0] = 0
     previous_bin_data = None
@@ -274,9 +274,9 @@ def get_binned_data(df, time_bins):
 
     # pulling out data to be entered into metric specific dataframes
     subj_data = {
-        "binned_correct_pokes": binned_data["left_poke_count"],
-        "binned_incorrect_pokes": binned_data["right_poke_count"],
-        "binned_pellets": binned_data["pellet_count"],
+        "Binned_Correct_Pokes": binned_data["Left_Poke_Count"],
+        "Binned_Incorrect_Pokes": binned_data["Right_Poke_Count"],
+        "Binned_Pellets": binned_data["Pellet_Count"],
     }
 
     return subj_data
@@ -291,14 +291,14 @@ def create_df(
     condition_names,
 ):
     columns = condition_names + [
-        "total_correct_pokes",
-        "total_incorrect_pokes",
-        "total_pellets",
-        "binned_correct_pokes",
-        "binned_incorrect_pokes",
-        "binned_pellets",
-        "bin",
-        "bin_time",
+        "Total_Correct_Pokes",
+        "Total_Incorrect_Pokes",
+        "Total_Pellets",
+        "Binned_Correct_Pokes",
+        "Binned_Incorrect_Pokes",
+        "Binned_Pellets",
+        "Bin",
+        "Bin_Time",
     ]
 
     data = pd.DataFrame(columns=columns)
@@ -329,8 +329,8 @@ def create_df(
             **subject_info,
             **aggregate_data,
             **binned_data,
-            "bin": list(range(1, num_bins + 1)),
-            "bin_time": time_bins,
+            "Bin": list(range(1, num_bins + 1)),
+            "Bin_Time": time_bins,
         }
 
         data = pd.concat([data, pd.DataFrame(mouse)], ignore_index=True)
