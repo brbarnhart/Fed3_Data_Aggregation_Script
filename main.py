@@ -1,4 +1,5 @@
 import argparse
+import sys
 import warnings
 from pathlib import Path
 
@@ -6,6 +7,20 @@ import pandas as pd
 import questionary
 
 warnings.filterwarnings("ignore", category=pd.errors.PerformanceWarning)
+
+
+def get_base_dir() -> Path:
+    """
+    Returns the directory where the .exe (or script) is located.
+    Works in dev (python main.py), onefile bundle, and onedir bundle.
+    """
+    if getattr(sys, "frozen", False):
+        # Running as bundled executable (.exe)
+        # In --onefile mode, sys.executable is inside _MEIxxxx, but its parent is the real exe dir
+        return Path(sys.executable).resolve().parent
+    else:
+        # Running as normal Python script
+        return Path(__file__).resolve().parent
 
 
 def get_raw_data_files(raw_data_path: Path) -> list[Path]:
@@ -338,7 +353,7 @@ def save_aggregated_data(df, folder_path):
 
 
 if __name__ == "__main__":
-    cwd = Path(__file__).parent.resolve()
+    cwd = get_base_dir()
 
     parser = setup_parser()
     args = parser.parse_args()
@@ -347,6 +362,9 @@ if __name__ == "__main__":
         raw_data_path = (cwd / "sample_data").resolve()
     else:
         raw_data_path = (cwd / args.data).resolve()
+
+    print(f"\nBase directory detected: {cwd}")
+    print(f"Looking for data in: {raw_data_path}\n")
 
     (session_length_min, bin_size, breakpoint_time) = get_user_inputs(args)
 
